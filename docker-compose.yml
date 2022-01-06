@@ -6,9 +6,9 @@ services:
         build: ./docker_config/php
         restart: always
         volumes:
-            - ./${BACKEND_APP}:/var/www/highload
+            - ./${BACKEND_APP}:/var/www/printful
             - ./docker_config/php/www2.conf:/usr/local/etc/php-fpm.d/www2.conf
-        working_dir: /var/www/highload
+        working_dir: /var/www/printful
         ports:
             - "10180:9000"
         networks:
