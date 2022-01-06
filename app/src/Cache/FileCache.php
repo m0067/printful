@@ -9,13 +9,15 @@ class FileCache extends AbstractCache
     /**
      * @inheritDoc
      */
-    public function set(string $key, $value, int $duration)
+    public function set(string $key, $value, int $duration): self
     {
         $filePath = $this->getFilePath($key);
         $value = $this->marshaller->marshal($value);
         $expiresAt = \time() + $duration;
         $data = $expiresAt.'\n'.\rawurlencode($key).'\n'.$value;
         $this->write($filePath, $data);
+
+        return $this;
     }
 
     /**
