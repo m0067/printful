@@ -31,7 +31,7 @@ abstract class AbstractCache implements CacheInterface
     /**
      * @inheritDoc
      */
-    public function get(string $key): null|string
+    public function get(string $key): mixed
     {
         $value = $this->doGet($key);
 
