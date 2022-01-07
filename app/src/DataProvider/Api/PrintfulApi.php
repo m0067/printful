@@ -34,7 +34,7 @@ class PrintfulApi
             );
 
             $data = Utils::jsonDecode((string)$response->getBody(), true)['result'];
-//            $this->cache->set($key, $data, self::CACHE_DURATION);
+            $this->cache->set($key, $data, self::CACHE_DURATION);
         }
 
         return $data;
