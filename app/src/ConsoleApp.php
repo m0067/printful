@@ -34,6 +34,13 @@ class ConsoleApp
         return $dir;
     }
 
+    public static function getParam(string $key): mixed
+    {
+        $key = 'CONSOLE.'.\strtoupper($key);
+
+        return isset($_ENV[$key]) ? $_ENV[$key] : null;
+    }
+
     private function getArg(): string
     {
         $arg = $_SERVER['argv'][1] ?? '';

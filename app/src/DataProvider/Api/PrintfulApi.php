@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dev\Printful\DataProvider\Api;
 
 use Dev\Printful\Cache\CacheInterface;
+use Dev\Printful\ConsoleApp;
 use Dev\Printful\DataProvider\Dto\PrintfulShippingOptionsDto;
 use GuzzleHttp\Client;
 use GuzzleHttp\Utils;
@@ -34,7 +35,8 @@ class PrintfulApi
             );
 
             $data = Utils::jsonDecode((string)$response->getBody(), true)['result'] ?? [];
-            $this->cache->set($key, $data, self::CACHE_DURATION);
+            $duration = (int)ConsoleApp::getParam('apiCacheDuration') ?: self::CACHE_DURATION;
+            $this->cache->set($key, $data, $duration);
         }
 
         return $data;

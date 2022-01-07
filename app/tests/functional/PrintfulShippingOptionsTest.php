@@ -26,6 +26,8 @@ class PrintfulShippingOptionsTest extends TestCase
     public function testApiWithInvalidCache(): void
     {
         (new AddPrintfulShippingOptionsCommand)->execute();
+        \sleep(4);
+        (new AddPrintfulShippingOptionsCommand)->execute();
 
         $this->assertFileExists('/tmp/tests/dev-printful-cache/UQravgol7tMu2vs4jse+rijNQzc=');
         $data = \json_decode($this->getActualOutputForAssertion(), true);
