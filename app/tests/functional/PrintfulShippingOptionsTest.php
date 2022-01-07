@@ -28,12 +28,11 @@ class PrintfulShippingOptionsTest extends TestCase
     public function testApiWithExpiredCache(): void
     {
         (new AddPrintfulShippingOptionsCommand)->execute();
-        $this->getActualOutputForAssertion();
         \sleep(4);
         (new AddPrintfulShippingOptionsCommand)->execute();
 
         $this->assertFileExists(self::FILE_PATH);
-        $data = \json_decode($this->getActualOutputForAssertion(), true);
+        $data = \json_decode(explode(PHP_EOL, $this->getActualOutputForAssertion())[1], true);
         $this->assertIsString($data[0]['id']);
         $this->assertIsString($data[0]['name']);
         $this->assertIsString($data[0]['rate']);
