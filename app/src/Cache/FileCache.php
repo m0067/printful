@@ -30,7 +30,7 @@ class FileCache extends AbstractCache
 
         if ($expiresAt && $now >= $expiresAt) {
             \fclose($handle);
-            $this->delete($filePath);
+            @\unlink($filePath);
 
             return null;
         }
@@ -67,10 +67,5 @@ class FileCache extends AbstractCache
         \fclose($handle);
 
         \rename($tmpFile, $filePath);
-    }
-
-    private function delete(string $filePath): bool
-    {
-        return @\unlink($filePath);
     }
 }
