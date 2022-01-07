@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dev\Printful\Tests;
+namespace Dev\Printful\Tests\Functional;
 
 use Dev\Printful\Command\AddPrintfulShippingOptionsCommand;
 use PHPUnit\Framework\TestCase;
