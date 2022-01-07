@@ -11,7 +11,7 @@ class PrintfulShippingOptionsTest extends TestCase
 {
     private const FILE_PATH = '/tmp/tests/dev-printful-cache/UQravgol7tMu2vs4jse+rijNQzc=';
 
-    public function testApiWithValidCache(): void
+    public function testApiWithCache(): void
     {
         (new AddPrintfulShippingOptionsCommand)->execute();
 
