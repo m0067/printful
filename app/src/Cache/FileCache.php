@@ -6,32 +6,44 @@ namespace Dev\Printful\Cache;
 
 class FileCache extends AbstractCache
 {
-    /**
-     * @inheritDoc
-     */
-    public function set(string $key, $value, int $duration): self
+    protected function doSet(string $key, string $marshalledData, int $duration): self
     {
         $filePath = $this->getFilePath($key);
-        $value = $this->marshaller->marshal($value);
         $expiresAt = \time() + $duration;
-        $data = $expiresAt.'\n'.\rawurlencode($key).'\n'.$value;
+        $data = $expiresAt.'\n'.\rawurlencode($key).'\n'.$marshalledData;
         $this->write($filePath, $data);
 
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function get(string $key)
+    protected function doGet(string $key): null|string
     {
-        $value = $this->validate($key);
+        $now = \time();
+        $filePath = $this->getFilePath($key);
+        $handle = @\fopen($filePath, 'r');
 
-        if (\is_bool($value) && !$value) {
+        if (!\is_file($filePath) || !$handle) {
             return null;
         }
 
-        return $this->marshaller->unmarshal($value);
+        $expiresAt = (int)\fgets($handle);
+
+        if ($expiresAt && $now >= $expiresAt) {
+            \fclose($handle);
+            $this->delete($filePath);
+
+            return null;
+        }
+
+        $storedKey = \rawurldecode(\rtrim(\fgets($handle)));
+        $value = \stream_get_contents($handle);
+        \fclose($handle);
+
+        if ($key !== $storedKey) {
+            return null;
+        }
+
+        return $value;
     }
 
     private function getFilePath(string $key): string
@@ -60,35 +72,5 @@ class FileCache extends AbstractCache
     private function delete(string $filePath): bool
     {
         return @\unlink($filePath);
-    }
-
-    private function validate(string $key): false|string
-    {
-        $now = \time();
-        $filePath = $this->getFilePath($key);
-        $handle = @\fopen($filePath, 'r');
-
-        if (!\is_file($filePath) || !$handle) {
-            return false;
-        }
-
-        $expiresAt = (int)\fgets($handle);
-
-        if ($expiresAt && $now >= $expiresAt) {
-            \fclose($handle);
-            $this->delete($filePath);
-
-            return false;
-        }
-
-        $storedKey = \rawurldecode(\rtrim(\fgets($handle)));
-        $value = \stream_get_contents($handle);
-        \fclose($handle);
-
-        if ($key !== $storedKey) {
-            return false;
-        }
-
-        return $value;
     }
 }
