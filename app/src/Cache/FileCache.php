@@ -20,7 +20,7 @@ class FileCache extends AbstractCache
     {
         $now = \time();
         $filePath = $this->getFilePath($key);
-        $handle = @\fopen($filePath, 'r');
+        $handle = @\fopen($filePath, 'rb');
 
         if (!\is_file($filePath) || !$handle) {
             return null;
@@ -62,7 +62,7 @@ class FileCache extends AbstractCache
     {
         $tmpFile = $filePath.\bin2hex(\random_bytes(7));
 
-        $handle = \fopen($tmpFile, 'x');
+        $handle = \fopen($tmpFile, 'xb');
         \fwrite($handle, $data);
         \fclose($handle);
 
