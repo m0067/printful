@@ -27,7 +27,7 @@ class ConsoleApp
     {
         $dir = \sys_get_temp_dir();
 
-        if (isset($_ENV['CONSOLE_APP']) && $_ENV['consoleApp'] === 'test') {
+        if (isset($_ENV['CONSOLE_APP']) && $_ENV['CONSOLE_APP'] === 'test') {
             $dir .= '/tests';
         }
 
