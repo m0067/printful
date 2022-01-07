@@ -28,7 +28,7 @@ class PrintfulShippingOptionsTest extends TestCase
     public function testApiWithExpiredCache(): void
     {
         (new AddPrintfulShippingOptionsCommand)->execute();
-        \sleep(4);
+        \sleep(3);
         (new AddPrintfulShippingOptionsCommand)->execute();
 
         $this->assertFileExists(self::FILE_PATH);
