@@ -37,6 +37,6 @@ class AddPrintfulShippingOptionsCommand implements CommandInterface
         $shippingOptionsDto->items = [$itemDto];
         $result = $api->fetchShippingOptions($shippingOptionsDto);
 
-        var_dump($result);
+        echo \json_encode($result).PHP_EOL;
     }
 }
