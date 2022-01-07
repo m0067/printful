@@ -62,7 +62,7 @@ class FileCache extends AbstractCache
 
     private function write(string $filePath, string $data): void
     {
-        if (!\is_dir($this->getDir()) && !\mkdir($this->getDir(), 0777) && !\is_dir($this->getDir())) {
+        if (!\is_dir($this->getDir()) && !\mkdir($this->getDir(), 0777, true) && !\is_dir($this->getDir())) {
             throw new \RuntimeException(\sprintf('Directory "%s" was not created', $this->getDir()));
         }
 
