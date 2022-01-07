@@ -25,4 +25,12 @@ class PrintfulShippingOptionsDto extends AbstractDto
             'items' => $items,
         ];
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return $this->recipient.\implode('', $this->items);
+    }
 }

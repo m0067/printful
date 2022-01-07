@@ -7,9 +7,12 @@ namespace Dev\Printful\DataProvider\Api;
 use Dev\Printful\Cache\CacheInterface;
 use Dev\Printful\DataProvider\Dto\PrintfulShippingOptionsDto;
 use GuzzleHttp\Client;
+use GuzzleHttp\Utils;
 
 class PrintfulApi
 {
+    private const CACHE_PREFIX = 'pf_api_';
+    private const CACHE_DURATION = 3600;
     private Client $client;
 
     public function __construct(protected CacheInterface $cache)
@@ -19,14 +22,21 @@ class PrintfulApi
 
     public function fetchShippingOptions(PrintfulShippingOptionsDto $dto): array
     {
-        $response = $this->client->post(
-            '/shipping/rates',
-            [
-                'json' => $dto->toArray(),
-            ]
-        );
+        $key = self::CACHE_PREFIX.sha1((string)$dto);
+        $data = $this->cache->get($key);
 
-        $content = $response->json();
+        if (is_null($data)) {
+            $response = $this->client->post(
+                '/shipping/rates',
+                [
+                    'json' => $dto->toArray(),
+                ]
+            );
 
+            $data = Utils::jsonDecode((string)$response->getBody(), true);
+            $this->cache->set($key, $data, self::CACHE_DURATION);
+        }
+
+        return $data;
     }
 }
