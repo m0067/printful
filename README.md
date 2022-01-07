@@ -1,4 +1,4 @@
-# Printful app
+# Printful app with self-written tiny console framework
 
 ## Init project
 
