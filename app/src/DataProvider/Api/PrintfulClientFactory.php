@@ -16,7 +16,7 @@ class PrintfulClientFactory
     {
         return new Client([
             RequestOptions::HEADERS => [
-                'Authorization' => 'Basic '.base64_encode(self::API_KEY),
+                'Authorization' => 'Basic '.\base64_encode(self::API_KEY),
             ],
             'base_uri' => self::BASE_URI,
         ]);
