@@ -9,7 +9,7 @@ use Dev\Printful\Marshaller\MarshallerInterface;
 
 abstract class AbstractCache implements CacheInterface
 {
-    public function __construct(protected ?MarshallerInterface $marshaller = null)
+    public function __construct(private ?MarshallerInterface $marshaller = null)
     {
         $this->marshaller = $marshaller ?? new DefaultMarshaller();
     }
