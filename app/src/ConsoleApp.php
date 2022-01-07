@@ -36,7 +36,7 @@ class ConsoleApp
 
     public static function getParam(string $key): mixed
     {
-        $key = 'CONSOLE.'.\strtoupper($key);
+        $key = 'CONSOLE__'.\strtoupper($key);
 
         return isset($_ENV[$key]) ? $_ENV[$key] : null;
     }

@@ -12,7 +12,7 @@
         <ini name="display_errors" value="1" />
         <ini name="error_reporting" value="-1" />
         <env name="CONSOLE_APP" value="test"/>
-        <env name="CONSOLE.APICACHEDURATION" value="3"/>
+        <env name="CONSOLE__APICACHEDURATION" value="3"/>
     </php>
 
     <testsuites>
