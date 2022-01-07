@@ -10,7 +10,7 @@ class FileCache extends AbstractCache
     {
         $filePath = $this->getFilePath($key);
         $expiresAt = \time() + $duration;
-        $data = $expiresAt.PHP_EOL.\rawurlencode($key).PHP_EOL.$marshalledData;
+        $data = $expiresAt.\PHP_EOL.\rawurlencode($key).\PHP_EOL.$marshalledData;
         $this->write($filePath, $data);
 
         return $this;
