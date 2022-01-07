@@ -12,7 +12,7 @@ use GuzzleHttp\Utils;
 class PrintfulApi
 {
     private const CACHE_PREFIX = 'pf_api_';
-    private const CACHE_DURATION = 3600;
+    private const CACHE_DURATION = 300;
     private Client $client;
 
     public function __construct(protected CacheInterface $cache)
