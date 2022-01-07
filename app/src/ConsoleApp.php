@@ -23,6 +23,17 @@ class ConsoleApp
         return \dirname(__DIR__);
     }
 
+    public static function getTempDir(): string
+    {
+        $dir = \sys_get_temp_dir();
+
+        if (\isset($_ENV['consoleApp']) && $_ENV['consoleApp'] === 'test') {
+            $dir .= '/tests';
+        }
+
+        return $dir;
+    }
+
     private function getArg(): string
     {
         $arg = $_SERVER['argv'][1] ?? '';

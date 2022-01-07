@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Dev\Printful\Cache;
 
+use Dev\Printful\ConsoleApp;
+
 class FileCache extends AbstractCache
 {
     protected function doSet(string $key, string $marshalledData, int $duration): self
@@ -55,7 +57,7 @@ class FileCache extends AbstractCache
 
     private function getDir(): string
     {
-        return \sys_get_temp_dir().'/dev-printful-cache/';
+        return ConsoleApp::getTempDir().'/dev-printful-cache/';
     }
 
     private function write(string $filePath, string $data): void
