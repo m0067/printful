@@ -25,7 +25,7 @@ class PrintfulApi
         $key = self::CACHE_PREFIX.sha1((string)$dto);
         $data = $this->cache->get($key);
 
-        if (is_null($data)) {
+        if (\is_null($data)) {
             $response = $this->client->post(
                 '/shipping/rates',
                 [
