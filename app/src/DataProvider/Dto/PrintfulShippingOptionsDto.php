@@ -11,4 +11,18 @@ class PrintfulShippingOptionsDto extends AbstractDto
      * @var PrintfulItemDto[]
      */
     public array $items;
+
+    public function toArray(): array
+    {
+        $items = [];
+
+        foreach ($this->items as $item) {
+            $items[] = $item->toArray();
+        }
+
+        return [
+            'recipient' => $this->recipient->toArray(),
+            'items' => $items,
+        ];
+    }
 }
