@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dev\Printful\Marshaller;
+namespace Dev\Printful\Cache\Marshaller;
 
 class DefaultMarshaller implements MarshallerInterface
 {

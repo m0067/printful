@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dev\Printful\Cache;
 
-use Dev\Printful\Marshaller\DefaultMarshaller;
-use Dev\Printful\Marshaller\MarshallerInterface;
+use Dev\Printful\Cache\Marshaller\DefaultMarshaller;
+use Dev\Printful\Cache\Marshaller\MarshallerInterface;
 
 abstract class AbstractCache implements CacheInterface
 {
