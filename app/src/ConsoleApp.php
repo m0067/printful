@@ -8,7 +8,7 @@ class ConsoleApp
 {
     public function run(): void
     {
-        foreach (glob($this->getProjectDir().'/src/Command/*Command.php') as $fileName) {
+        foreach (\glob($this->getProjectDir().'/src/Command/*Command.php') as $fileName) {
             $className = pathinfo($fileName)['filename'];
             $command = '\\Dev\\Printful\\Command\\'.$className;
 
