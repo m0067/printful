@@ -32,6 +32,6 @@ class AddPrintfulShippingOptionsCommand implements CommandInterface
         $shippingOptionsDto->items = [$itemDto];
         $result = (new PrintfulService)->listShippingOptions($shippingOptionsDto);
 
-        echo \json_encode($result).PHP_EOL;
+        echo \json_encode($result, \JSON_UNESCAPED_UNICODE).PHP_EOL;
     }
 }
